@@ -1,0 +1,36 @@
+version: "3"
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: always
+    ports:
+      # Public HTTP Port:
+      - '80:80'
+      # Public HTTPS Port:
+      - '443:443'
+      # Admin Web Port:
+      - '81:81'
+    environment:
+      # These are the settings to access your db
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "ENTER YOUR USERNAME"
+      DB_MYSQL_PASSWORD: "ENTER YOUR PASSWORD"
+      DB_MYSQL_NAME: "npm"
+      # DB_SQLITE_FILE: "/data/database.sqlite"
+      # DISABLE_IPV6: 'true'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+  db:
+    image: jc21/mariadb-aria:10.4
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'ENTER YOUR MYSQL PASS'
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'YOUR USERNAME'
+      MYSQL_PASSWORD: 'ENTER YOUR MYSQL PASS'
+    volumes:
+      - ./data/mysql:/var/lib/mysql
