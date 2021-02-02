@@ -1,6 +1,9 @@
 # docker-services + nginx proxy
 
 
+
+TODO -- clean up readme
+
 git clone <repo>
 
 cd docker-services
