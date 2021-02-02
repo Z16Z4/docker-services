@@ -17,7 +17,6 @@ services:
       DB_MYSQL_USER: "ENTER YOUR USERNAME"
       DB_MYSQL_PASSWORD: "ENTER YOUR PASSWORD"
       DB_MYSQL_NAME: "npm"
-      # DB_SQLITE_FILE: "/data/database.sqlite"
       # DISABLE_IPV6: 'true'
     volumes:
       - ./data:/data
