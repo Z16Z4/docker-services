@@ -1,0 +1,40 @@
+version: '3'
+
+volumes:
+  nextcloud:
+  ndb:
+  
+networks:
+  default:
+    external:
+      name: proxy_default
+services:
+  ndb:
+   image: mariadb
+   restart: always
+   command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+   volumes:
+    - ndb:/var/lib/mysql
+   environment:
+    - MYSQL_ROOT_PASSWORD=
+    - MYSQL_PASSWORD=
+    - MYSQL_DATABASE=nextcloud
+    - MYSQL_USER=nextcloud
+  nextcloud:
+   container_name: nextcloud
+   image: nextcloud:latest
+   restart: always
+   volumes:
+    - ./apps/nextcloud/custom_apps:/var/www/html/custom_apps
+    - ./apps/nextcloud/config:/var/www/html/config
+    - ./apps/nextcloud/data:/var/www/html/data
+    # - /media/drive/nc_data:/nc_data
+   ports:
+    - 8080:80
+   links:
+    - ndb
+   environment:
+    - MYSQL_PASSWORD=
+    - MYSQL_DATABASE=nextcloud
+    - MYSQL_USER=nextcloud
+    - MYSQL_HOST=ndb
