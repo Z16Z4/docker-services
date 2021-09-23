@@ -1,0 +1,13 @@
+version: "3"
+services:
+  whoogle:
+    image: benbusby/whoogle-search
+    restart: always
+    ports:
+      - 5000:5000
+    networks:
+      - proxy_default
+
+networks:
+  proxy_default:
+    external: true

@@ -14,8 +14,8 @@ services:
       # These are the settings to access your db
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
-      DB_MYSQL_USER: "ENTER YOUR USERNAME"
-      DB_MYSQL_PASSWORD: "ENTER YOUR PASSWORD"
+      DB_MYSQL_USER: ""
+      DB_MYSQL_PASSWORD: ""
       DB_MYSQL_NAME: "npm"
       # DISABLE_IPV6: 'true'
     volumes:
@@ -24,12 +24,12 @@ services:
     depends_on:
       - db
   db:
-    image: jc21/mariadb-aria:10.4
+    image: jc21/mariadb-aria
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 'ENTER YOUR MYSQL PASS'
+      MYSQL_ROOT_PASSWORD: ''
       MYSQL_DATABASE: 'npm'
-      MYSQL_USER: 'YOUR USERNAME'
-      MYSQL_PASSWORD: 'ENTER YOUR MYSQL PASS'
+      MYSQL_USER: ''
+      MYSQL_PASSWORD: ''
     volumes:
       - ./data/mysql:/var/lib/mysql
