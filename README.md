@@ -1,5 +1,5 @@
 # docker-services
-
+Warning, please patch log4j before using or update to the latest version of java (use at your own caution)
 ### Nextcloud:
 
 change MYSQL ROOT PASSWORD & USERNAMES ETC
